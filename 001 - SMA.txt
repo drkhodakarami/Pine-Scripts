@@ -1,0 +1,26 @@
+//@version=5
+
+//
+// Pine Script Version 5
+// @author Alireza Khodakarami
+// Script Library : https://www.github.com/drkhodakarami/Pine-Scripts
+//
+
+//indicator(title, shorttitle, overlay) → void
+indicator(title= "Simple Moving Average", shorttitle = "SMA", overlay = true)
+
+//maPeriod is a variable used to store the indicator lookback period, In this case, from the input
+//input.int(defval, title, tooltip) → input int
+maPeriod = input.int(21, title = "MA Period", tooltip = "Lookback period for the moving average. Only use integers")
+
+//maSource is the source value to calculate the moving average. In this case, from input
+//input.source(defval, title, tooltip) → series float
+maSource = input.source(close, title = "Source", tooltip = "Input time series for the simple moving average calculations")
+
+// ma is a variable used to store the actual moving average value. In this case, from the ta.sma() built-in function
+//ta.sma(source, length) → series float
+ma = ta.sma(maSource, maPeriod)
+
+//plot will draw the information on the chart
+//plot(series, title, color, linewidth) → plot
+plot(ma, title= "MA", color = color.yellow, linewidth = 2)
